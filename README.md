@@ -10,7 +10,8 @@
 
 - 核实日期与车票（12306 官方接口）
 - 抓取小红书的攻略、机位、美食、避雷（绕开风控的浏览器路径）
-- 用高德 API 算真实通勤时间、查 POI 与天气
+- 用高德 API 算真实通勤时间、查 POI
+- 用 Open-Meteo 查 16 天天气预报（含降水概率，免 Key）
 - 把冲突的约束理清，排成可执行的逐日行程
 - 生成固定 13 章的 Word 计划表
 
@@ -95,6 +96,7 @@ npm i docx
 ├── config.example.json         高德 Key 模板
 ├── scripts/
 │   ├── rail_query.js           12306 查票
+│   ├── weather_query.js        16 天天气预报（Open-Meteo）
 │   └── docx_gen.js             Word 生成
 └── references/
     ├── xiaohongshu-sop.md      小红书抓取 SOP
@@ -118,6 +120,16 @@ node scripts/rail_query.js \
 - 自动剔除 12306 的「时刻未定」假记录（24:00 发车 / 99:59 历时）
 - 被限流时会自动退避重试，并提示等几分钟
 
+### 查天气
+
+```bash
+node scripts/weather_query.js --city 铜陵
+node scripts/weather_query.js --city 铜陵 --from 2026-11-01 --to 2026-11-03
+node scripts/weather_query.js --search 铜陵        # 看地理编码候选
+```
+
+基于 Open-Meteo，**免 Key、最长 16 天、带降水概率**。自带中文地理编码消歧（「铜陵」会选中安徽那个）和 WMO 天气码翻译。超出 16 天会明确说查不到。
+
 ### 生成 Word
 
 ```bash
@@ -133,7 +145,7 @@ node scripts/docx_gen.js --spec plan.json   # 生成
 
 - **12306 会软限流**：查得太密会返回 HTML 兜底页，需等 3–5 分钟
 - **小红书笔记详情常有风控**：走浏览器点击路径，图片型笔记抓不到正文
-- **高德只有约 4 天天气预报**：超出范围会明确写「查不到」，不编造
+- **天气**：Open-Meteo 给 16 天，但它是境外服务，连不上时退回高德（约 4 天）；超出范围会明确写「查不到」，不编造
 - 门票价格可能随季节调整，以景区官方为准
 
 ---

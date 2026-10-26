@@ -104,6 +104,9 @@ curl -s "https://restapi.amap.com/v3/direction/walking?origin=...&destination=..
 
 ## 4. 天气
 
+> 首选其实是 Open-Meteo（16 天 + 降水概率，免 Key），用 `node scripts/weather_query.js --city 铜陵`。
+> 本节的高德天气作为**兜底**：Open-Meteo 连不上、或需要更符合国内习惯的中文天气词时使用。
+
 ### 实况
 
 ```bash
