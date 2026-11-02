@@ -30,6 +30,33 @@ git clone https://github.com/Future1ove/travel-planer.git \
 
 ---
 
+## 一键安装（推荐）
+
+克隆后进目录跑一条命令：
+
+```bash
+cd ~/.claude/skills/travel-planner
+node setup.js
+```
+
+它会自动完成：
+
+- 检查 Node / npm / git / Python
+- **缺 `docx` 就直接 `npm i docx`**
+- 验证高德 Key（缺了会告诉你去哪申请、怎么配）
+- 检查 opencli 和小红书依赖
+- 打印「哪些功能可用、还缺什么」
+
+常用参数：
+
+```bash
+node setup.js --no-install   # 只检查，不安装任何东西
+node setup.js --full         # 额外跑联网自测（12306 / 天气）
+node setup.js --json         # 机器可读输出
+```
+
+---
+
 ## 配置
 
 ### 高德 Web 服务 Key（必需）
@@ -93,6 +120,8 @@ npm i docx
 ```
 .
 ├── SKILL.md                    主文件：工作流与硬规则
+├── setup.js                    一键安装 / 环境自检
+├── package.json                依赖声明（docx）
 ├── config.example.json         高德 Key 模板
 ├── scripts/
 │   ├── rail_query.js           12306 查票

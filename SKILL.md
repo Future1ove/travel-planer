@@ -192,6 +192,8 @@ node scripts/docx_gen.js --spec plan.json
 
 ## 环境适配（本机 Windows）
 
+**新环境先跑一次自检**：`node setup.js`。它会自动安装缺失的 `docx`、验证高德 Key、检查 opencli，并明确告诉你还缺什么、去哪拿。`--full` 会额外跑联网自测。
+
 这些坑踩过一次不必再踩：
 
 - `python3` 是坏的 Microsoft Store 别名，用 **`py -3`**

@@ -1,0 +1,14 @@
+{
+  "name": "travel-planner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Claude Code skill: 生成可执行的旅行攻略与 Word 计划表",
+  "scripts": {
+    "setup": "node setup.js",
+    "check": "node setup.js --no-install",
+    "test:full": "node setup.js --full"
+  },
+  "dependencies": {
+    "docx": "^9.14.0"
+  }
+}

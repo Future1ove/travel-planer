@@ -311,7 +311,7 @@ async function main() {
   if (args.price && rows.length) {
     console.log(`正在查询 ${rows.length} 趟的票价…`);
     for (const r of rows) {
-      const p = await queryPrice(r._trainNo, r._fromNo, r._toNo, r._seatTypes, r.date, cookie);
+      const p = await queryPrice(r._trainNo, r._fromNo, r._toNo, r._seatTypes, r.date, await cookieGetter(false));
       const parts = [];
       if (p.O) parts.push(`二等¥${p.O}`);
       if (p.M) parts.push(`一等¥${p.M}`);
